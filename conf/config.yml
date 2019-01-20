@@ -1,4 +1,4 @@
 # 天気情報取得apiURL（OpenWeatherMap）
-BASE_URL : http://api.openweathermap.org/data/2.5/forecast
+BASE_URL : https://api.openweathermap.org/data/2.5/forecast/
 # 引数なしで実行した場合の情報取得対象地域
 DEFAULT_AREA : Tokyo
