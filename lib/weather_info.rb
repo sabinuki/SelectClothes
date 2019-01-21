@@ -12,10 +12,10 @@ class WeatherInfo
 
   # コンストラクタ
   def initialize(area_name)
-    if area_name == ''
-      @area_name = area_name.collect(&:capitalize).join(' ')
-    elsif
+    if area_name.empty?
       @area_name = YAML.load_file('./conf/config.yml')['DEFAULT_AREA']
+    elsif
+      @area_name = area_name.collect(&:capitalize).join(' ')
     end
   end
 
@@ -42,6 +42,6 @@ class WeatherInfo
     end.compact
     area_candidate.map do |candidate|
       candidate['name']
-    end.unshift('該当する地域名がありません。') << '--------------------'
+    end.unshift('該当する地域名がありません。該当候補の地域名を表示します。') << '--------------------'
   end
 end
