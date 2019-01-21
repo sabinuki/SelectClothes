@@ -30,7 +30,7 @@ class Answer
       humidity = res['main']['humidity']
       di = calculate_DI(res)
       message = @@messages.fetch(di.floor(-1).to_s)
-      { datetime: datetime, weather: weather, temp: temp, humidity: humidity, message: message }
+      { datetime: datetime, weather: weather, temp: temp, humidity: humidity, message: message, di: di }
     end
   end
 
