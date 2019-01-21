@@ -30,7 +30,7 @@ class Answer
       humidity = res['main']['humidity']
       di = calculate_DI(res)
       message = @@messages.fetch(di.floor(-1).to_s)
-      {datetime: datetime, weather: weather, temp: temp, humidity: humidity, message: message}
+      { datetime: datetime, weather: weather, temp: temp, humidity: humidity, message: message }
     end
   end
 
@@ -39,6 +39,8 @@ class Answer
   def calculate_DI(response)
     t = response['main']['temp'] - 273.15
     h = response['main']['humidity']
-    0.81 * t + 0.01 * h * (0.99 * t - 14.3) + 46.3
+    di = 0.81 * t + 0.01 * h * (0.99 * t - 14.3) + 46.3
+    return di if di >= 0
+    return 0 if di < 0
   end
 end

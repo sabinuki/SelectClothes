@@ -10,12 +10,9 @@ class WeatherInfo
   @@messages = File.open('./json/message.json') { |j| hash = JSON.load(j) }
   @@area_list = File.open('./json/city.list.json') { |j| hash = JSON.load(j) }
 
-  # 除外時刻
-  @@exclude_time = ['00:00:00', '03:00:00']
-
   # コンストラクタ
   def initialize(area_name)
-    if area_name
+    if area_name == ''
       @area_name = area_name.collect(&:capitalize).join(' ')
     elsif
       @area_name = YAML.load_file('./conf/config.yml')['DEFAULT_AREA']
@@ -31,10 +28,9 @@ class WeatherInfo
     if match_area[0]
       area_id = match_area[0]['id']
       response = JSON.parse(open(@@base_url + "?id=#{area_id}&APPID=#{@@api_key}").read)
+      puts response['city']['name']
       answer = Answer.new(response)
       answer.return_answer
-    else
-      guess_area
     end
   end
 
